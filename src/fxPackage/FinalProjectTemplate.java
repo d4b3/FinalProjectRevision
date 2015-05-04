@@ -4,6 +4,7 @@ package fxPackage; /**
 
 
 import partOne.*;
+import javax.swing.*;
 import javafx.stage.Stage;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -21,7 +22,6 @@ public class FinalProjectTemplate extends Application {
     //TODO: This program initializes the GUI for the Baby names program.
     public static String name, year, gender, result;
     Label newLabel, topLabel = new Label();
-    boolean topFiveFlag = false;
     int i = 4;
     @Override
     public void start(Stage primaryStage)  {
@@ -106,10 +106,8 @@ public class FinalProjectTemplate extends Application {
                     try {
                         String[] prompt = TopFiveReader.labelList();
                         for(int i = 0; i < prompt.length; i++){
-                            topLabel = new Label(prompt[i]);
-                            mainPane.add(topLabel, 1, i + 5);
+                            JOptionPane.showMessageDialoge(prompt[i]);
                         }
-                        topFiveFlag = true;
                     }
                     catch (Exception e2){
                         System.err.print("File parsing failed");
