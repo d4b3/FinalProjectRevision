@@ -1,15 +1,11 @@
 package fxPackage; /**
  * Created by Dan Blocker on 5/2/2015.
  */
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
+
+
 import partOne.*;
-import commonFiles.*;
 import javafx.stage.Stage;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -23,8 +19,9 @@ import javafx.scene.layout.GridPane;
 
 public class FinalProjectTemplate extends Application {
     //TODO: This program initializes the GUI for the Baby names program.
-    public static String name, year, gender, result, labelNum;
-    Label clearLabel, newLabel = new Label();
+    public static String name, year, gender, result;
+    Label newLabel, topLabel = new Label();
+    boolean topFiveFlag = false;
     int i = 4;
     @Override
     public void start(Stage primaryStage)  {
@@ -50,6 +47,7 @@ public class FinalProjectTemplate extends Application {
             mainPane.add(rbMale, 1, 1);
             mainPane.add(rbFemale, 2, 1);
 
+            //Radio button action
             rbMale.setOnAction(e -> {
                 gender = "M";
             });
@@ -105,11 +103,20 @@ public class FinalProjectTemplate extends Application {
 
             });
             btPrintTop5.setOnAction(e -> {
+                    try {
+                        String[] prompt = TopFiveReader.labelList();
+                        for(int i = 0; i < prompt.length; i++){
+                            topLabel = new Label(prompt[i]);
+                            mainPane.add(topLabel, 1, i + 5);
+                        }
+                        topFiveFlag = true;
+                    }
+                    catch (Exception e2){
+                        System.err.print("File parsing failed");
+                    }
 
-                System.out.println(name);
-                //GridPane pane = new GridPane();
 
-            });
+        });
 
             btClear.setOnAction(e -> {
                 textField.setText(" ");
@@ -141,4 +148,5 @@ public class FinalProjectTemplate extends Application {
     public static String getYear(){
         return year;
     }
+
 }

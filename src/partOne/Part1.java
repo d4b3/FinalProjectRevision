@@ -2,7 +2,6 @@ package partOne;
 
 import fxPackage.*;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -40,18 +39,5 @@ public class Part1 {
             return result;
         }
     }
-   // public static String topFiveReturn() throws FileNotFoundException {
-   //     String[] result;
-   //
-   //
-   //    if(FinalProjectTemplate.getYear().equals("All")){
-
-   //     }if else(FinalProjectTemplate.getGender().equals(null)) {
-
-   //     } else {
-
-   //     }
-
-   // }
 
 }
