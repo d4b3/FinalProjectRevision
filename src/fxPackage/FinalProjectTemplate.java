@@ -4,6 +4,7 @@ package fxPackage; /**
 
 
 import partOne.*;
+import javax.swing.*;
 import javafx.stage.Stage;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -21,7 +22,6 @@ public class FinalProjectTemplate extends Application {
     //TODO: This program initializes the GUI for the Baby names program.
     public static String name, year, gender, result;
     Label newLabel, topLabel = new Label();
-    boolean topFiveFlag = false;
     int i = 4;
     @Override
     public void start(Stage primaryStage)  {
@@ -50,9 +50,11 @@ public class FinalProjectTemplate extends Application {
             //Radio button action
             rbMale.setOnAction(e -> {
                 gender = "M";
+                mainPane.setStyle("-fx-background-color: aqua");
             });
             rbFemale.setOnAction(e -> {
                 gender = "F";
+                mainPane.setStyle("-fx-background-color: hotpink");
             });
 
             //Placing the ComboBox for the year selection
@@ -83,18 +85,8 @@ public class FinalProjectTemplate extends Application {
 
                 try{
                     System.out.println("\n\nFile parsing successful");
-                    if(i > 4) {
-                        newLabel.setText(" ");
-                    }
-
                     result = Part1.resultReturn();
-                    newLabel = new Label(result);
-
-                    if(gender.equals("F")){
-
-                    }
-                    mainPane.add(newLabel, 1,4);
-                    ++i;
+                    JOptionPane.showMessageDialog(null, result);
 
                 } catch (Exception e1){
                     System.out.println("File parsing failed.\nrestarting");
@@ -104,12 +96,19 @@ public class FinalProjectTemplate extends Application {
             });
             btPrintTop5.setOnAction(e -> {
                     try {
-                        String[] prompt = TopFiveReader.labelList();
-                        for(int i = 0; i < prompt.length; i++){
-                            topLabel = new Label(prompt[i]);
-                            mainPane.add(topLabel, 1, i + 5);
+                        JFrame frame = new JFrame("");
+                        String message = "";
+                        String[] prompt = new String[5];
+                        if(cboYear.getValue().equals("All")) {
+                            prompt = TopFiveReader.labelList("ranking_cumulative.txt");
+                        } else {
+                            prompt = TopFiveReader.labelList("Babynamesranking" + cboYear.getValue() +".txt");
                         }
-                        topFiveFlag = true;
+                        for(int i = 0; i < prompt.length; i++){
+                            message += prompt[i] + "\n";
+                        }
+                        JOptionPane.showMessageDialog(frame, message);
+
                     }
                     catch (Exception e2){
                         System.err.print("File parsing failed");
@@ -120,7 +119,6 @@ public class FinalProjectTemplate extends Application {
 
             btClear.setOnAction(e -> {
                 textField.setText(" ");
-                newLabel.setText(" ");
             });
 
             //add all three buttons on the same row
