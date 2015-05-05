@@ -21,8 +21,6 @@ import javafx.scene.layout.GridPane;
 public class FinalProjectTemplate extends Application {
     //TODO: This program initializes the GUI for the Baby names program.
     public static String name, year, gender, result;
-    Label newLabel, topLabel = new Label();
-    int i = 4;
     @Override
     public void start(Stage primaryStage)  {
         //a GridPane arrange nodes in a grid(matrix) formation
